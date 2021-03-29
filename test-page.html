@@ -1,0 +1,199 @@
+<html lang="ko" class="win win10 chrome chrome89 webkit webkit537 screenModeLight">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+    <title>testpage</title>
+
+    <link
+      id="favicon"
+      rel="shortcut icon"
+      href="https://ssl.pstatic.net/cmstatic/webclient/icon/20200615184036/favicon.ico"
+    />
+    <link
+      id="favicon_apple"
+      rel="apple-touch-icon"
+      href="https://ssl.pstatic.net/cmstatic/webclient/icon/20200615184036/favicon_96x96.png"
+    />
+
+    <link rel="alternate" hreflang="x-default" href="https://band.us/" />
+
+    <meta
+      name="description"
+      content="밴드는 그룹 멤버와 함께 하는 공간입니다. 동호회, 스터디, 주제별 모임을 밴드로 시작하세요."
+    />
+
+    <meta
+      name="keywords"
+      content="group,community,message,chat,그룹,투표,모임,커뮤니티,일정,채팅,캘린더,사진,앨범,메신저,동아리,팀플, 동호회, 프로젝트, 앨범, 공유,스티커, 조모임,밴드"
+    />
+
+    <meta name="msapplication-TileColor" content="#ffffff" />
+    <meta
+      name="msapplication-TileImage"
+      content="https://ssl.pstatic.net/cmstatic/webclient/icon/20200615184036/favicon_256x256.png"
+    />
+    <meta name="application-name" content="Band" />
+
+    <meta name="viewport" content="width=1119" />
+
+
+    <div data-viewname="DWebSimpleLayoutView" style="height: 100%">
+      <section data-viewname="DBandLiveCreateView" class="lyWrap lyVideoLiveWrap">
+        <header class="gSrOnly">
+          <h3>라이브 세팅</h3>
+        </header>
+        <div class="liveStartSettingWrap">
+          <div class="liveStartSettingArea">
+            <h3 class="liveStartTitle"><strong>밴드 라이브 방송</strong> 시작하기</h3>
+            <div class="liveStartSubText">
+              <span class="liveStartSubTextInner"
+                >밴드에서 방송을 시작하려면 인코더를 설치해야합니다.<br />인코더 설치 후 밴드를
+                연결해서 방송을 시작해 보세요</span
+              >
+              <a href="https://band.us/live/encoderInfo" target="_blank" class="liveHelpLink gMat11"
+                >인코더 사용 가이드</a
+              >
+            </div>
+            <div class="liveChatIntroBox _wrapIntroduceMyLive">
+              <span class="liveSettingNum gMat24">01</span>
+              <div class="liveIntroInputArea gMat6">
+                <textarea
+                  class="liveIntroTextArea _liveDescription"
+                  maxlength="500"
+                  placeholder="여기를 눌러 소개글을 작성해 보세요."
+                ></textarea>
+                <div class="liveIntroCheck gMat3 gMal2">
+                  <label for="checkPossibleChat" class="uCheck -switch">
+                    <span class="text liveLabelText">방송 중 실시간 대화</span>
+                    <input
+                      type="checkbox"
+                      id="checkPossibleChat"
+                      class="checkInput _checkPossibleChat"
+                      checked="checked"
+                    />
+                    <span class="checkLabel gMat2 gMal9">
+                      <span class="shape"></span>
+                    </span>
+                  </label>
+                </div>
+              </div>
+            </div>
+
+            <div class="liveStreamBox gPat9">
+              <span class="liveSettingNum gMat18">02</span>
+              <div class="liveStartSubTitle gMat2">
+                스트림 URL과 스트림 키를 발급받아 복사한 후, 인코더에 붙여넣기 해주세요. 인코더에서
+                방송을 시작하면, 미리보기 화면이 보여집니다.
+              </div>
+              <div class="liveStreamInputBox gMat17">
+                <label class="liveLabelText2" for="_streamUrl">스트림 URL</label>
+                <div class="liveStreamInputInner gMat3">
+                  <input
+                    type="text"
+                    readonly="readonly"
+                    class="liveStreamInput _streamUrl"
+                    placeholder="발급 버튼을 클릭해 주세요."
+                    id="_streamUrl"
+                  />
+                  <!--  복사버튼이 활성화일때  -active클래스가 들어갑니다. -->
+                  <button
+                    type="button"
+                    class="btnUrlCopy _btnCopyStreamUrl"
+                    disabled="disabled"
+                    data-clipboard-target="#_streamUrl"
+                    onclick="alert('복사되었습니다.');"
+                  >
+                    복사
+                  </button>
+                </div>
+              </div>
+              <div class="liveStreamInputBox gMat10">
+                <label class="liveLabelText2" for="_streamKey">스트림 키</label>
+                <div class="liveStreamInputInner gMat3">
+                  <input
+                    type="text"
+                    readonly="readonly"
+                    class="liveStreamInput _streamKey"
+                    placeholder="발급 버튼을 클릭해 주세요."
+                    id="_streamKey"
+                  />
+                  <button
+                    type="button"
+                    class="btnUrlCopy _btnCopyStreamKey"
+                    disabled="disabled"
+                    data-clipboard-target="#_streamKey"
+                    onclick="alert('복사되었습니다.');"
+                  >
+                    복사
+                  </button>
+                </div>
+              </div>
+              <div class="liveStreamInputBox gMat25 gMab30 gPab7">
+                <div class="liveStreamInputInner gMat4">
+                  <button type="button" class="btnKeyIssue -active _btnGetStreamUrl" onclick='issueClick();'>
+                    발급받기</button
+                  ><time class="issueCheckTime _remainTime"></time>
+                  <span class="liveValidateText _cautionKeyMessage" style="display: none"
+                    >제한 시간이 지났습니다. 다시 발급받아 주세요.</span
+                  >
+                </div>
+              </div>
+              <div class="liveStreamAttentionBox">
+                <ul class="liveStreamAttentionList gMat-1">
+                  <li class="liveStreamAttentionItem">
+                    밴드/페이지 별로 동시에 1개만 할 수 있고, 시간에 제한이 있습니다.
+                  </li>
+                  <li class="liveStreamAttentionItem">
+                    발급 후 3분 내에 인코더에서 방송을 시작해야하니 바로 붙여넣을 수 있도록 인코더를
+                    미리 세팅해 주세요.
+                  </li>
+                </ul>
+              </div>
+              <div class="liveStartBottom gMat7">
+                <a
+                  href="https://band.us/cs/notice/3774"
+                  target="_blank"
+                  class="liveMoreInfoLink gMat4 gMal1"
+                  >더 알아보기</a
+                >
+              </div>
+              
+            </div>
+          </div>
+          <footer class="footer"></footer>
+        </div>
+      </section>
+      <div id="layerContainer">
+        <div data-viewname="DLayerContainerView" class="layerContainerView"></div>
+      </div>
+    </div>
+    <div class="_printRegion"></div>
+    <div class="sprSVGSymbol"></div>
+  </body>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.7.1/clipboard.min.js"></script>
+
+  <script type="text/javascript">
+    var clipboard = new Clipboard('._btnCopyStreamKey')
+    clipboard.on('success', (e) => console.log(e))
+    clipboard.on('error', (e) => console.log(e))
+
+    var clipboard2 = new Clipboard('._btnCopyStreamUrl')
+    clipboard.on('success', (e) => console.log(e))
+    clipboard.on('error', (e) => console.log(e))
+    
+
+    function issueClick() {
+      document.querySelector("body > div:nth-child(1) > section > div > div > div.liveStreamBox.gPat9 > div.liveStreamInputBox.gMat17 > div > button").disabled = false
+      document.querySelector("body > div:nth-child(1) > section > div > div > div.liveStreamBox.gPat9 > div.liveStreamInputBox.gMat10 > div > button").disabled = false
+      document.querySelector("#_streamUrl").removeAttribute('readonly')
+      document.querySelector("#_streamUrl").value = 'streamUrlTest'
+      document.querySelector("#_streamKey").removeAttribute('readonly')
+      document.querySelector("#_streamKey").value = 'streamKeyTest'
+    }
+
+    function copyClick() {
+      alert('복사되었습니다.')
+    }
+  </script>
+</html>
