@@ -32,5 +32,6 @@ streamsettings = wsclient.call(requests.GetStreamSettings()).getSettings()
 print("\n다음과 같이 OBS Stream Setting이 설정되었습니다.")
 print("- Stream Url : " + streamsettings["server"])
 print("- Stream Key : " + streamsettings["key"])
+input("press enter to continue...")
 
 wsclient.disconnect()
