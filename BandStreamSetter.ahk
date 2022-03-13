@@ -1,12 +1,21 @@
 SetKeyDelay, 50
 
-F4::       
-WinGetActiveTitle, winTitle
-WinMove, %winTitle%,, 1240, 0, 690, 1087
-Sleep 100
-MouseClick, left, 357, 470, 3
+F4::              
 
-;get date 
+;refresh
+;Send, {F5} 
+
+;wait till page loaded
+;pageLoaded := false
+;while(pageLoaded = false)
+;{
+;	sleep 1000
+;	ImageSearch, X, Y, 0, 0, A_ScreenWidth, A_ScreenHeight, *12 test2.png
+;	if ErrorLevel = 0
+;		pageLoaded := true
+;}
+
+;get date
 FormatTime, today, , yyyy-MM-dd
 
 ;get time
@@ -25,8 +34,12 @@ if ErrorLevel
 	return
 }
 
+;Send, {TAB 2}
+;Sleep 100
+
+;Send, ^{A}
 Send, %title%
-Sleep 100
+Sleep 1000
 
 ;issue keys
 Send, {TAB 4}
@@ -49,5 +62,27 @@ sleep, 1000
 Send, {ENTER}
 stream_key := clipboard
 
-;run python script to set obs stream settings
-Run python ObsStreamSetter.py %stream_url% %stream_key%
+Run python test.py %stream_url% %stream_key%
+
+;delete existing configure file
+;FileDelete, service.json
+
+;create new configure file
+;FileAppend,
+;(
+;{
+;`t"settings": {
+;`t`t"bwtest": false,
+;`t`t"key": "%stream_key%",
+;`t`t"server": "%stream_url%",
+;`t`t"use_auth": false
+;`t},
+;`t"type": "rtmp_custom"
+;}
+;), service.json
+;
+;if ErrorLevel 
+;	MsgBox, FileAppend error
+;
+;;reload obs
+;Run, reload.bat
