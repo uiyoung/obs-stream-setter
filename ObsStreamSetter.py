@@ -1,37 +1,41 @@
+import obsws_python as obs
 import sys
-from obswebsocket import obsws, requests, exceptions
+import logging
+logging.basicConfig(level=logging.INFO)
 
 # get arguments
 argument = sys.argv
 
-# connect to local websocket plugin
-wsclient = obsws("localhost", 4444, "1234")
-try:
-    wsclient.connect()
-except ConnectionRefusedError as e:
-    print(e)
-    print("websocket password를 확인해주세요.")
-    exit()
-except exceptions.ConnectionFailure as e:
-    print(e)
-    print("OBS를 먼저 켜주세요. 또는 port를 확인해주세요")
-    exit()
 
-# change key and save to disk
-streamsettings = {'server': argument[1], 'key': argument[2]}
-print("- Stream Url : {0}\n- Stream Key : {1}\n위와 같이 OBS Stream Setting을 변경하시겠습니까? (y/n)".format(streamsettings['server'], streamsettings['key']))
-confirm = input()
-if confirm != 'y':
-    print('cancelled')
-    exit()
+def setStream(server_url, stream_key):
+    stream_type = "rtmp_custom"
+    stream_settings = {
+        'server': server_url,
+        'key': stream_key,
+        'bwtest': False,
+        'use_auth': False
+    }
 
-wsclient.call(requests.SetStreamSettings("rtmp_custom", streamsettings, True))
+    # pass conn info
+    cl = obs.ReqClient(host='localhost', port=4455, password='123456')
+    # set stream settings
+    resp = cl.set_stream_service_settings(stream_type, stream_settings)
+    # get stream settings info
+    resp = cl.get_stream_service_settings()
 
-# double check
-streamsettings = wsclient.call(requests.GetStreamSettings()).getSettings()
-print("\n다음과 같이 OBS Stream Setting이 설정되었습니다.")
-print("- Stream Url : " + streamsettings["server"])
-print("- Stream Key : " + streamsettings["key"])
-input("press enter to continue...")
+    print('--- Stream Settings ---')
+    print('- Server URL :', resp.stream_service_settings["server"])
+    print('- Stream Key :', resp.stream_service_settings["key"])
+    confirm = input("start stream with this setting? [y/n]")
 
-wsclient.disconnect()
+    if confirm != 'y':
+        print('cancelled')
+        exit()
+
+    # start stream
+    cl.start_stream()
+
+
+if __name__ == '__main__':
+    # setStream('test', 'hi')
+    setStream(argument[1], argument[2])
