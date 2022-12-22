@@ -62,7 +62,7 @@ sleep, 1000
 Send, {ENTER}
 stream_key := clipboard
 
-Run python test.py %stream_url% %stream_key%
+Run python ObsStreamSetter.py %stream_url% %stream_key%
 
 ;delete existing configure file
 ;FileDelete, service.json
